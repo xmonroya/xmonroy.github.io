@@ -2,5 +2,5 @@
 Este sitio contiene la información que ido recolectando durante mi experiencia como administrador de sistemas Linux.
 
 ## Archivos sobre LVM
-- [Crear un Volumen Group](/LVM/crearVG.html)
+- [Crear un Volumen Group](https://xmonroya.github.io/LVM/crearVG.html)
 
