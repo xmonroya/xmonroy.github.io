@@ -1,0 +1,8 @@
+/content
+/myenv
+pelicanconf.py
+publishconf.py
+tasks.py
+/_pycache
+/pelican-themes
+/Makefile

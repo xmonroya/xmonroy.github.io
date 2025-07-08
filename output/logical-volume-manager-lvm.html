@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>sferoblog</title>
+	<meta name="description" content="">
+	<meta name="author" content="Alex Monroy">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">sferoblog</a>
+			<ul class="nav">
+					<li ><a href="/category/indice.html">indice</a></li>
+					<li class="active"><a href="/category/lvm.html">LVM</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="https://getpelican.com/">Pelican</a></li>
+				<li><a href="https://www.python.org/">Python.org</a></li>
+				<li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+				<li><a href="#">You can modify those links in your config file</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="#">You can add links in your config file</a></li>
+				<li><a href="#">Another social link</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>Logical Volume Manager (LVM)</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/logical-volume-manager-lvm.html">2025-07-08 10:00:00-04:00</a>
+by <a class="url fn" href="/author/alex-monroy.html">Alex Monroy </a>
+ in <a href="/category/lvm.html">LVM</a>
+</div>
+		<div><h1>Logical Volume manager (LVM)</h1>
+<p>LVM es un sistema de gestión del almacenamiento que te libera de las limitaciones de las particiones de disco fijas, ofreciendo una manera mucho más flexible y dinámica de organizar y redimensionar tu espacio.</p>
+<h2>¿Qué es LVM y por qué usarlo?</h2>
+<p>En los servidores, es común particionar los discos para manejar distintos sistemas de archivos. Este esquema produce particiones de tamaño fijo, cuyo tamaño no se puede redimensionar fácilmente. Redimensionarlas exige varios requisitos; si estos no se cumple, a menudo se debe optar por migrar la información hacia otro disco más grande. Todos estos procesos implican el reinicio del servidor, lo que produce períodos de interrupción de los servicios.</p>
+<p>LVM resuelve este problema introduciendo una capa de abstracción. En lugar de lidiar con particiones fias, creas volúmenes lógicos que pueden abarcar múltiples discos fisicos o particiones y ser fácilmente redimensionados sobre la marcha. Esto proporciona numerosas ventajas:</p>
+<ul>
+<li>Redimensionamiento dinámico: Expande o contrae volúmenes lógicos sin desmontar o reiniciar el sistema. Esto es crucial para servidores y aplicaciones que necesitan permanecer en línea.</li>
+<li>Asignación flexible: Agrupa almacenamiento de diferentes discos duros y lo asigna a volúmenes lógicos según sea necesario, evitando espacio desperdiciado.</li>
+<li>Gestión simplificada: Administra el almacenamiento utilizando nombre de volúmenes lógicos ( por ejemplo, "databases", "webserver") en lugar de nombres complejos de dispositivos como /dev/sda1</li>
+<li>Funciones avanzadas: LVM ofrece funciones como snapshots (para copias de seguridad o pruebas), striping (para rendimiento) y mirroring (para redundancia), que no son fácilmente alcanzables con particiones tradicionales.</li>
+</ul>
+<h2>Componentes clave de LVM</h2>
+<p>LVM funciona al apilar estos tres componentes principales:</p>
+<ul>
+<li>Volúmenes físicos (PV): Estos son la base de LVM. Un PV puede ser un disco duro completo, una partición de un disco duro u otro dispositivo de bloque. Para marcar una partición como un PV se utiliza el comando pvcreate.</li>
+<li>Grupos de volúmenes (VG): Los PV se agrupan en VG, que actúan como un solo grupo de almacenamiento. El comando vgcreate crea un VG.</li>
+<li>Volúmenes lógicos (LV): los LV se extraen del VG. Estos son los volúmenes con los que interactúan tu sistema operativo y las aplicaciones. Puedes formatearlos con un sistema de archivos(como EXT4 o XFS) y montarlos como particiones regulares. El comando lvcreate se utiliza para crear LV.</li>
+</ul>
+<p>Ejemplo práctico</p>
+<p>Digamos que tienes un servidor web con dos discos duros /dev/sda y /dev/sdb. Aquí tienes cómo podrías organizar el almacenamiento usando LVM.</p>
+<p>a. Crear los PV</p>
+<div class="highlight"><pre><span></span><code>pvcreate<span class="w"> </span>/dev/sda<span class="w"> </span>/dev/sdb
+</code></pre></div>
+
+<p>b. Crear un VG a partir de los PV recién creados</p>
+<div class="highlight"><pre><span></span><code>vgcreate<span class="w"> </span>webserver_vg<span class="w"> </span>/dev/sda<span class="w"> </span>/dev/sdb
+</code></pre></div>
+
+<p>c. Crear los Volumenes lógicos</p>
+<div class="highlight"><pre><span></span><code><span class="c1">#Para los archivos del sitio web</span>
+lvcreate<span class="w"> </span>-L<span class="w"> </span>20G<span class="w"> </span>-n<span class="w"> </span>websites<span class="w"> </span>webserver_vg
+
+<span class="c1">#Para los archivos de la base de datos</span>
+lvcreate<span class="w"> </span>-L<span class="w"> </span>10G<span class="w"> </span>-n<span class="w"> </span>database<span class="w"> </span>webserver_vg
+<span class="c1">#Para los archivos de registro, utilizando el espacio restante</span>
+lvcreate<span class="w"> </span>-l<span class="w"> </span><span class="m">100</span>%FREE<span class="w"> </span>-n<span class="w"> </span>logs<span class="w"> </span>webserver_vg
+</code></pre></div>
+
+<p>Ahora tienes tres volúmenes lógicos, "website", "database" y "logs", que puedes formtear y montar. Si el volumen "website" necesita mas espacio, puedes expandirlo fácilmente usando lvextend sin afectar el servidor web en ejecución.</p>
+<h2>Beneficios para adminitradores de sistemas</h2>
+<p>LVM simplifica las tareas de administración de almacenamiento para administradores de sistemas:</p>
+<ul>
+<li>
+<p>Expansión más fácil: Agregar más almacenamiento y expandir volúmenes se convierte en un proceso sencillo.</p>
+</li>
+<li>
+<p>Tiempo de inactividad reducido: Muchas operaciones se pueden realizar en línea, minimizando las interrupciones del servicio.</p>
+</li>
+<li>
+<p>Flexibilidad: LVM proporciona mayor control sobre la asignación de almacenamiento y facilita la adaptación a los requisitos cambiantes.</p>
+</li>
+<li>
+<p>Protección de datos: Funciones como snapshots y mirroring mejoran las capacidades de protección de datos.</p>
+</li>
+</ul>
+<h2>¿Cuándo es más útil LVM?</h2>
+<p>LVM es particularmente valioso en:</p>
+<ul>
+<li>
+<p>Entornos de servidor: Donde la flexibilidad, el tiempo de actividad y la utilización eficiente del almacenamiento son críticos.</p>
+</li>
+<li>
+<p>Virtualización: LVM se utiliza a menudo para administrar almacenamiento para máquinas virtuales, permitiendo el fácil redimensionamiento y creación de snapshots de discos virtuales.</p>
+</li>
+<li>
+<p>Sistemas con necesidades de almacenamiento en crecimiento: LVM facilita la adaptación a las demandas crecientes de almacenamiento sin complejos redimensionamientos.</p>
+</li>
+</ul>
+<p>LVM es una tecnología poderosa y versátil que mejora la administración de almacenamiento en sistemas Linux. Al comprender sus conceptos clave y ventajas, puedes desbloquear una mayor flexibilidad y eficiencia en la gestión de tu espacio en disco.</p></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; Alex Monroy</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>
