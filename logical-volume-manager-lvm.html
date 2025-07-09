@@ -1,69 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>sferoblog</title>
-	<meta name="description" content="">
-	<meta name="author" content="Alex Monroy">
+<html lang="es">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Logical Volume Manager (LVM)</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="LVM es un sistema de gestión del almacenamiento que te libera de las limitaciones de las particiones de disco fijas, ofreciendo una manera mucho..." />
+        </head>
 
-	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="/theme/html5.js"></script>
-	<![endif]-->
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">sferoblog</a></h1>
+                        <nav><ul>
+                                                <li><a href="/category/indice.html">indice</a></li>
+                                                <li class="active"><a href="/category/lvm.html">LVM</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/logical-volume-manager-lvm.html" rel="bookmark"
+             title="Permalink to Logical Volume Manager (LVM)">Logical Volume Manager (LVM)</a></h1>
+      </header>
 
-	<!-- Styles -->
-	<link href="/theme/bootstrap.min.css" rel="stylesheet">
-	<link href="/theme/local.css" rel="stylesheet">
-	<link href="/theme/pygments.css" rel="stylesheet">
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-07-08T10:00:00-04:00">
+                Published: mar 08 julio 2025
+        </abbr>
 
-	<!-- Feeds -->
-
-
-
-
-</head>
-<body>
-	<div class="topbar">
-	  <div class="topbar-inner">
-		<div class="container-fluid">
-		  <a class="brand" href="/">sferoblog</a>
-			<ul class="nav">
-					<li ><a href="/category/indice.html">indice</a></li>
-					<li class="active"><a href="/category/lvm.html">LVM</a></li>
-			</ul>
-			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
-		</div>
-	  </div>
-	</div>
-
-	<div class="container-fluid">
-	  <div class="sidebar">
-		<div class="well">
-			<h3>Blogroll</h3>
-			<ul>
-				<li><a href="https://getpelican.com/">Pelican</a></li>
-				<li><a href="https://www.python.org/">Python.org</a></li>
-				<li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-				<li><a href="#">You can modify those links in your config file</a></li>
-			</ul>
-			<div class="social">
-			<h3>Social</h3>
-			<ul>
-				<li><a href="#">You can add links in your config file</a></li>
-				<li><a href="#">Another social link</a></li>
-			</ul>
-			</div>
-		</div>
-	  </div>
-	  <div class="content">
-	<div class='article'>
-		<div class="page-header"><h1>Logical Volume Manager (LVM)</h1></div>
-		<div class="well small">Permalink: <a class="more" href="/logical-volume-manager-lvm.html">2025-07-08 10:00:00-04:00</a>
-by <a class="url fn" href="/author/alex-monroy.html">Alex Monroy </a>
- in <a href="/category/lvm.html">LVM</a>
-</div>
-		<div><h1>Logical Volume manager (LVM)</h1>
-<p>LVM es un sistema de gestión del almacenamiento que te libera de las limitaciones de las particiones de disco fijas, ofreciendo una manera mucho más flexible y dinámica de organizar y redimensionar tu espacio.</p>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/alex-monroy.html">Alex Monroy</a>
+                </address>
+        <p>In <a href="/category/lvm.html">LVM</a>.</p>
+        
+</footer><!-- /.post-info -->        <p>LVM es un sistema de gestión del almacenamiento que te libera de las limitaciones de las particiones de disco fijas, ofreciendo una manera mucho más flexible y dinámica de organizar y redimensionar tu espacio.</p>
 <h2>¿Qué es LVM y por qué usarlo?</h2>
 <p>En los servidores, es común particionar los discos para manejar distintos sistemas de archivos. Este esquema produce particiones de tamaño fijo, cuyo tamaño no se puede redimensionar fácilmente. Redimensionarlas exige varios requisitos; si estos no se cumple, a menudo se debe optar por migrar la información hacia otro disco más grande. Todos estos procesos implican el reinicio del servidor, lo que produce períodos de interrupción de los servicios.</p>
 <p>LVM resuelve este problema introduciendo una capa de abstracción. En lugar de lidiar con particiones fias, creas volúmenes lógicos que pueden abarcar múltiples discos fisicos o particiones y ser fácilmente redimensionados sobre la marcha. Esto proporciona numerosas ventajas:</p>
@@ -130,14 +103,38 @@ lvcreate<span class="w"> </span>-l<span class="w"> </span><span class="m">100</s
 <p>Sistemas con necesidades de almacenamiento en crecimiento: LVM facilita la adaptación a las demandas crecientes de almacenamiento sin complejos redimensionamientos.</p>
 </li>
 </ul>
-<p>LVM es una tecnología poderosa y versátil que mejora la administración de almacenamiento en sistemas Linux. Al comprender sus conceptos clave y ventajas, puedes desbloquear una mayor flexibilidad y eficiencia en la gestión de tu espacio en disco.</p></div>
-	</div>
-		<footer>
-		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
-		  <p>&copy; Alex Monroy</p>
-		</footer>
-	  </div>
+<p>LVM es una tecnología poderosa y versátil que mejora la administración de almacenamiento en sistemas Linux. Al comprender sus conceptos clave y ventajas, puedes desbloquear una mayor flexibilidad y eficiencia en la gestión de tu espacio en disco.</p>
+      </div><!-- /.entry-content -->
 
-	</div>
-</body>
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="#">You can modify those links in your config file</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="#">You can add links in your config file</a></li>
+                                                        <li><a href="#">Another social link</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
 </html>

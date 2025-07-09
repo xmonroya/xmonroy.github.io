@@ -1,68 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>sferoblog</title>
-	<meta name="description" content="">
-	<meta name="author" content="Alex Monroy">
+<html lang="es">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>Creación de un volumen group (VG)</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+    <meta name="description" content="Creación de un volumen group (VG) Un Grupo de Volumen es una colección de uno o más volumenes físicos (PVs). los VGs forman la base del sistema de..." />
+        </head>
 
-	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
-	<!--[if lt IE 9]>
-		<script src="/theme/html5.js"></script>
-	<![endif]-->
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">sferoblog</a></h1>
+                        <nav><ul>
+                                                <li><a href="/category/indice.html">indice</a></li>
+                                                <li class="active"><a href="/category/lvm.html">LVM</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+  <section id="content" class="body">
+    <article>
+      <header>
+        <h1 class="entry-title">
+          <a href="/creacion-de-un-volumen-group-vg.html" rel="bookmark"
+             title="Permalink to Creación de un volumen group (VG)">Creación de un volumen group (VG)</a></h1>
+      </header>
 
-	<!-- Styles -->
-	<link href="/theme/bootstrap.min.css" rel="stylesheet">
-	<link href="/theme/local.css" rel="stylesheet">
-	<link href="/theme/pygments.css" rel="stylesheet">
+      <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2025-07-08T10:00:00-04:00">
+                Published: mar 08 julio 2025
+        </abbr>
 
-	<!-- Feeds -->
-
-
-
-
-</head>
-<body>
-	<div class="topbar">
-	  <div class="topbar-inner">
-		<div class="container-fluid">
-		  <a class="brand" href="/">sferoblog</a>
-			<ul class="nav">
-					<li ><a href="/category/indice.html">indice</a></li>
-					<li class="active"><a href="/category/lvm.html">LVM</a></li>
-			</ul>
-			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
-		</div>
-	  </div>
-	</div>
-
-	<div class="container-fluid">
-	  <div class="sidebar">
-		<div class="well">
-			<h3>Blogroll</h3>
-			<ul>
-				<li><a href="https://getpelican.com/">Pelican</a></li>
-				<li><a href="https://www.python.org/">Python.org</a></li>
-				<li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
-				<li><a href="#">You can modify those links in your config file</a></li>
-			</ul>
-			<div class="social">
-			<h3>Social</h3>
-			<ul>
-				<li><a href="#">You can add links in your config file</a></li>
-				<li><a href="#">Another social link</a></li>
-			</ul>
-			</div>
-		</div>
-	  </div>
-	  <div class="content">
-	<div class='article'>
-		<div class="page-header"><h1>Creación de un volumen group (VG)</h1></div>
-		<div class="well small">Permalink: <a class="more" href="/creacion-de-un-volumen-group-vg.html">2025-07-08 10:00:00-04:00</a>
-by <a class="url fn" href="/author/alex-monroy.html">Alex Monroy </a>
- in <a href="/category/lvm.html">LVM</a>
-</div>
-		<div><h1>Creación de un volumen group (VG)</h1>
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/alex-monroy.html">Alex Monroy</a>
+                </address>
+        <p>In <a href="/category/lvm.html">LVM</a>.</p>
+        
+</footer><!-- /.post-info -->        <h1>Creación de un volumen group (VG)</h1>
 <p>Un Grupo de Volumen es una colección de uno o más volumenes físicos (PVs). los VGs forman la base del sistema de administación de volúmenes lógicos y actúan como un conjunto de almacenamiento del cual puedes asignar volúmenes lógicos.</p>
 <p>Partamos de la base que ya tenemos uno o más Volumenes Físicos (PV) creados, llamémolos /dev/sda y /dev/sdb.</p>
 <p>Y a parti de aquí veamos las operación de creación de un Grupo de Volumenes.</p>
@@ -71,14 +45,38 @@ by <a class="url fn" href="/author/alex-monroy.html">Alex Monroy </a>
 </code></pre></div>
 
 <p>este comando básicamente crea un nuevo VG de nombre "my_volume_group" que contendrá los Volumenes Físicos /dev/sda y /dev/sdb.</p>
-<p>Este nuevo VG tendrá como espacio la suma de los tamaños de /dev/sda y /dev/sdb, y podrá ser utilizado para crear Volumenes Lógicos de acuerdo a lo que necesitemos.</p></div>
-	</div>
-		<footer>
-		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
-		  <p>&copy; Alex Monroy</p>
-		</footer>
-	  </div>
+<p>Este nuevo VG tendrá como espacio la suma de los tamaños de /dev/sda y /dev/sdb, y podrá ser utilizado para crear Volumenes Lógicos de acuerdo a lo que necesitemos.</p>
+      </div><!-- /.entry-content -->
 
-	</div>
-</body>
+    </article>
+  </section>
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="#">You can modify those links in your config file</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="#">You can add links in your config file</a></li>
+                                                        <li><a href="#">Another social link</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
 </html>
