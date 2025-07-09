@@ -57,6 +57,7 @@
 <li>Grupos de volúmenes (<strong>VG, Volume Group</strong>): Los PV se agrupan en VG, que actúan como un gran espacio de almacenamiento. El comando vgcreate crea un VG.</li>
 <li>Volúmenes lógicos (<strong>LV, Logical Volume</strong>): Los LV se extraen del VG. Estos son los volúmenes con los que interactúan tu sistema operativo y las aplicaciones. Puedes formatearlos con un sistema de archivos(como EXT4 o XFS) y montarlos como particiones regulares. El comando lvcreate se utiliza para crear LV.</li>
 </ul>
+<p><a href="/LVM/images/lvm-system.png">LVM Simple</a></p>
 <p>Veamos un ejemplo sencillo. Imagina un servidor web con dos discos duros: /dev/sda (30GB) y /dev/sdb (10GB). Queremos organizar el almacenamiento así:</p>
 <ul>
 <li>Una partición de 20GB para el sitio web.</li>
