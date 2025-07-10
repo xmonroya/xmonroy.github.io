@@ -4,26 +4,26 @@
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <meta name="generator" content="Pelican" />
-                        <title>Creación de un volumen group (VG)</title>
+                        <title>Comando lsblk</title>
                         <link rel="stylesheet" href="/theme/css/main.css" />
-    <meta name="description" content="Un Grupo de Volumen es una colección de uno o más volumenes físicos (PVs). los VGs forman la base del sistema de administación de volúmenes..." />
+    <meta name="description" content="En las distribuciones Linux, lsblk es un comando muy útil para listar información de los dispositivos de bloque. La salida del lsblk es una tabla..." />
         </head>
 
         <body id="index" class="home">
                 <header id="banner" class="body">
                         <h1><a href="/">sferoblog</a></h1>
                         <nav><ul>
-                                                <li><a href="/category/comandos-linux.html">COmandos Linux</a></li>
+                                                <li class="active"><a href="/category/comandos-linux.html">COmandos Linux</a></li>
                                                 <li><a href="/category/lvm.html">LVM</a></li>
-                                                <li class="active"><a href="/category/lvmherr.html">LVMHerr</a></li>
+                                                <li><a href="/category/lvmherr.html">LVMHerr</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
   <section id="content" class="body">
     <article>
       <header>
         <h1 class="entry-title">
-          <a href="/creacion-de-un-volumen-group-vg.html" rel="bookmark"
-             title="Permalink to Creación de un volumen group (VG)">Creación de un volumen group (VG)</a></h1>
+          <a href="/comando-lsblk.html" rel="bookmark"
+             title="Permalink to Comando lsblk">Comando lsblk</a></h1>
       </header>
 
       <div class="entry-content">
@@ -35,17 +35,58 @@
                 <address class="vcard author">
                         By                                 <a class="url fn" href="/author/alex-monroy.html">Alex Monroy</a>
                 </address>
-        <p>In <a href="/category/lvmherr.html">LVMHerr</a>.</p>
+        <p>In <a href="/category/comandos-linux.html">COmandos Linux</a>.</p>
         
-</footer><!-- /.post-info -->        <p>Un Grupo de Volumen es una colección de uno o más volumenes físicos (PVs). los VGs forman la base del sistema de administación de volúmenes lógicos y actúan como un conjunto de almacenamiento del cual puedes asignar volúmenes lógicos.</p>
-<p>Partamos de la base que ya tenemos uno o más Volumenes Físicos (PV) creados, llamémolos /dev/sda y /dev/sdb.</p>
-<p>Y a parti de aquí veamos las operación de creación de un Grupo de Volumenes.</p>
-<p>El comando utilizado para la creación de un VG corresponde a:</p>
-<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>vgcreate<span class="w"> </span>my_volume_group<span class="w"> </span>/dev/sda<span class="w"> </span>/dev/sdb
-</code></pre></div>
-
-<p>este comando básicamente crea un nuevo VG de nombre "my_volume_group" que contendrá los Volumenes Físicos /dev/sda y /dev/sdb.</p>
-<p>Este nuevo VG tendrá como espacio la suma de los tamaños de /dev/sda y /dev/sdb, y podrá ser utilizado para crear Volumenes Lógicos de acuerdo a lo que necesitemos.</p>
+</footer><!-- /.post-info -->        <p>En las distribuciones Linux, lsblk es un comando muy útil para listar información de los dispositivos de bloque. </p>
+<p>La salida del lsblk es una tabla con las siguientes columnas:</p>
+<ul>
+<li>NAME: el nombre del dispositivo</li>
+<li>MAJ:MIN: Números de dispositivos mayor y menor.</li>
+<li>RM: Indica que el dispositivo es extraible (1=si, 0=no).</li>
+<li>SIZE: Tamaño del dispositivo en bytes.</li>
+<li>RO: Indica si el dispositivo es de solo lectura (1=si, 0=no).</li>
+<li>TYPE: el tipo de dispositivo (disk, part, lvm, rom, etc.).</li>
+<li>MOUNTPOINT: El punto de montaje </li>
+</ul>
+<p>Un ejemplo de la salida de lsblk podría ser:</p>
+<p><img alt="Ejemplo lsblk" src="/images/lsblk_ejemplo.png"></p>
+<p>Vamos a desglosar las partes clave de esta salida para entender cómo se ve LVM:</p>
+<ul>
+<li>
+<p>sda: Este es el primer disco físico (en este caso, un SSD de aproximadamente 232 GB).</p>
+</li>
+<li>
+<p>sda1: Una partición en sda, montada como /boot/efi (partición de arranque EFI).</p>
+</li>
+<li>
+<p>sda2: Otra partición en sda, montada como /boot (donde se encuentran los archivos del kernel y GRUB).</p>
+</li>
+<li>
+<p>sda3: Esta es la partición clave para LVM. En lugar de ser montada directamente, su MOUNTPOINT está vacío y su TYPE es part, pero debajo de ella, ves la estructura LVM:</p>
+</li>
+<li>
+<p>vgubuntu-root: Este es un volumen lógico (LV) llamado root que pertenece al grupo de volúmenes (VG) vgubuntu. Su tipo es lvm y está montado en la raíz del sistema de archivos (/).</p>
+</li>
+<li>
+<p>vgubuntu-swap_1: Otro LV del mismo vgubuntu, utilizado para el área de intercambio ([SWAP]).</p>
+</li>
+<li>
+<p>vgubuntu-home: Un tercer LV de vgubuntu, montado en /home.</p>
+</li>
+<li>
+<p>sdb: Este es un segundo disco físico (posiblemente un HDD de 931 GB).</p>
+</li>
+<li>
+<p>sdb1: Una partición en sdb. Similar a sda3, su MOUNTPOINT está vacío porque es parte de LVM.</p>
+</li>
+<li>
+<p>vgdata-lvdata: Este es un volumen lógico (LV) llamado lvdata que pertenece a un grupo de volúmenes diferente, vgdata. Está montado en /mnt/data, que podría ser un punto de montaje para datos de usuario o aplicaciones.</p>
+</li>
+<li>
+<p>sr0: Un dispositivo de tipo rom, que generalmente representa una unidad de CD/DVD/Blu-ray.</p>
+</li>
+</ul>
+<p>En conclusión, la salida de lsblk en un sistema muestra la jerarquía: Discos físicos -&gt; Particiones -&gt; Grupos de volúmenes -&gt; Volumenes lógicos -&gt; Puntos de montaje finales.</p>
       </div><!-- /.entry-content -->
 
     </article>

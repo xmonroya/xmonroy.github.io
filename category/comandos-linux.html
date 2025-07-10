@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+        <head>
+                        <meta charset="utf-8" />
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                        <meta name="generator" content="Pelican" />
+                        <title>sferoblog - COmandos Linux</title>
+                        <link rel="stylesheet" href="/theme/css/main.css" />
+        </head>
+
+        <body id="index" class="home">
+                <header id="banner" class="body">
+                        <h1><a href="/">sferoblog</a></h1>
+                        <nav><ul>
+                                                <li class="active"><a href="/category/comandos-linux.html">COmandos Linux</a></li>
+                                                <li><a href="/category/lvm.html">LVM</a></li>
+                                                <li><a href="/category/lvmherr.html">LVMHerr</a></li>
+                        </ul></nav>
+                </header><!-- /#banner -->
+
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="/comando-lsblk.html">Comando lsblk</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-07-08T10:00:00-04:00">
+                Published: mar 08 julio 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/alex-monroy.html">Alex Monroy</a>
+                </address>
+        <p>In <a href="/category/comandos-linux.html">COmandos Linux</a>.</p>
+        
+</footer><!-- /.post-info --><p>En las distribuciones Linux, lsblk es un comando muy útil para listar información de los dispositivos de bloque. </p>
+<p>La salida del lsblk es una tabla con las siguientes columnas:</p>
+<ul>
+<li>NAME: el nombre del dispositivo</li>
+<li>MAJ:MIN: Números de dispositivos mayor y menor.</li>
+<li>RM: Indica que el dispositivo es extraible (1=si, 0=no).</li>
+<li>SIZE: Tamaño del dispositivo en bytes.</li>
+<li>RO: Indica si el dispositivo es de solo lectura (1=si, 0=no).</li>
+<li>TYPE: el tipo de dispositivo (disk, part, lvm, rom, etc.).</li>
+<li>MOUNTPOINT: El punto de montaje </li>
+</ul>
+<p>Un ejemplo de la salida de lsblk podría ser:</p>
+<p><img alt="Ejemplo lsblk" src="/images/lsblk_ejemplo.png"></p>
+<p>Vamos a desglosar las partes clave de esta salida para entender cómo se ve LVM:</p>
+<ul>
+<li>
+<p>sda: Este es el primer disco físico (en este caso, un SSD de aproximadamente 232 GB).</p>
+</li>
+<li>
+<p>sda1: Una partición en sda, montada como /boot/efi (partición de arranque EFI).</p>
+</li>
+<li>
+<p>sda2: Otra partición en sda, montada como /boot (donde se encuentran los archivos del kernel y GRUB).</p>
+</li>
+<li>
+<p>sda3: Esta es la partición clave para LVM. En lugar de ser montada directamente, su MOUNTPOINT está vacío y su TYPE es part, pero debajo de ella, ves la estructura LVM:</p>
+</li>
+<li>
+<p>vgubuntu-root: Este es un volumen lógico (LV) llamado root que pertenece al grupo de volúmenes (VG) vgubuntu. Su tipo es lvm y está montado en la raíz del sistema de archivos (/).</p>
+</li>
+<li>
+<p>vgubuntu-swap_1: Otro LV del mismo vgubuntu, utilizado para el área de intercambio ([SWAP]).</p>
+</li>
+<li>
+<p>vgubuntu-home: Un tercer LV de vgubuntu, montado en /home.</p>
+</li>
+<li>
+<p>sdb: Este es un segundo disco físico (posiblemente un HDD de 931 GB).</p>
+</li>
+<li>
+<p>sdb1: Una partición en sdb. Similar a sda3, su MOUNTPOINT está vacío porque es parte de LVM.</p>
+</li>
+<li>
+<p>vgdata-lvdata: Este es un volumen lógico (LV) llamado lvdata que pertenece a un grupo de volúmenes diferente, vgdata. Está montado en /mnt/data, que podría ser un punto de montaje para datos de usuario o aplicaciones.</p>
+</li>
+<li>
+<p>sr0: Un dispositivo de tipo rom, que generalmente representa una unidad de CD/DVD/Blu-ray.</p>
+</li>
+</ul>
+<p>En conclusión, la salida de lsblk en un sistema muestra la jerarquía: Discos físicos -&gt; Particiones -&gt; Grupos de volúmenes -&gt; Volumenes lógicos -&gt; Puntos de montaje finales.</p>                    </article>
+                </aside><!-- /#featured -->
+                <section id="extras" class="body">
+                                <div class="blogroll">
+                                        <h2>links</h2>
+                                        <ul>
+                                                        <li><a href="https://getpelican.com/">Pelican</a></li>
+                                                        <li><a href="https://www.python.org/">Python.org</a></li>
+                                                        <li><a href="https://palletsprojects.com/p/jinja/">Jinja2</a></li>
+                                                        <li><a href="#">You can modify those links in your config file</a></li>
+                                        </ul>
+                                </div><!-- /.blogroll -->
+                                <div class="social">
+                                        <h2>social</h2>
+                                        <ul>
+
+                                                        <li><a href="#">You can add links in your config file</a></li>
+                                                        <li><a href="#">Another social link</a></li>
+                                        </ul>
+                                </div><!-- /.social -->
+                </section><!-- /#extras -->
+
+                <footer id="contentinfo" class="body">
+                        <address id="about" class="vcard body">
+                                Proudly powered by <a rel="nofollow" href="https://getpelican.com/">Pelican</a>, which takes great advantage of <a rel="nofollow" href="https://www.python.org/">Python</a>.
+                        </address><!-- /#about -->
+
+                        <p>The theme is by <a rel="nofollow" href="https://www.smashingmagazine.com/2009/08/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+                </footer><!-- /#contentinfo -->
+
+        </body>
+</html>
