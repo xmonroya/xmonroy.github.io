@@ -12,7 +12,6 @@
                 <header id="banner" class="body">
                         <h1><a href="https://xmonroya.github.io/">sferoblog</a></h1>
                         <nav><ul>
-                                                <li><a href="https://xmonroya.github.io/category/comandos-linux.html">Comandos Linux</a></li>
                                                 <li class="active"><a href="https://xmonroya.github.io/category/linux.html">Linux</a></li>
                                                 <li><a href="https://xmonroya.github.io/category/lvm.html">LVM</a></li>
                         </ul></nav>
@@ -20,7 +19,80 @@
 
                 <aside id="featured" class="body">
                     <article>
-                        <h1 class="entry-title"><a href="https://xmonroya.github.io/login-en-ssh-sin-retardo-descubre-el-secreto-para-accesos-relampago.html">Login en SSH sin retardo: Descubre el secreto para accesos relámpago</a></h1>
+                        <h1 class="entry-title"><a href="https://xmonroya.github.io/comando-lsblk.html">Comando lsblk</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2025-07-08T10:00:00-04:00">
+                Published: mar 08 julio 2025
+        </abbr>
+
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="https://xmonroya.github.io/author/alex-monroy.html">Alex Monroy</a>
+                </address>
+        <p>In <a href="https://xmonroya.github.io/category/linux.html">Linux</a>.</p>
+        
+</footer><!-- /.post-info --><p>En las distribuciones Linux, lsblk es un comando muy útil para listar información de los dispositivos de bloque. </p>
+<p>La salida del lsblk es una tabla con las siguientes columnas:</p>
+<ul>
+<li>NAME: el nombre del dispositivo</li>
+<li>MAJ:MIN: Números de dispositivos mayor y menor.</li>
+<li>RM: Indica que el dispositivo es extraible (1=si, 0=no).</li>
+<li>SIZE: Tamaño del dispositivo en bytes.</li>
+<li>RO: Indica si el dispositivo es de solo lectura (1=si, 0=no).</li>
+<li>TYPE: el tipo de dispositivo (disk, part, lvm, rom, etc.).</li>
+<li>MOUNTPOINT: El punto de montaje </li>
+</ul>
+<p>Un ejemplo de la salida de lsblk podría ser:</p>
+<p><img alt="Ejemplo lsblk" src="/images/lsblk_ejemplo.png"></p>
+<p>Vamos a desglosar las partes clave de esta salida para entender cómo se ve LVM:</p>
+<ul>
+<li>
+<p>sda: Este es el primer disco físico (en este caso, un SSD de aproximadamente 232 GB).</p>
+</li>
+<li>
+<p>sda1: Una partición en sda, montada como /boot/efi (partición de arranque EFI).</p>
+</li>
+<li>
+<p>sda2: Otra partición en sda, montada como /boot (donde se encuentran los archivos del kernel y GRUB).</p>
+</li>
+<li>
+<p>sda3: Esta es la partición clave para LVM. En lugar de ser montada directamente, su MOUNTPOINT está vacío y su TYPE es part, pero debajo de ella, ves la estructura LVM:</p>
+</li>
+<li>
+<p>vgubuntu-root: Este es un volumen lógico (LV) llamado root que pertenece al grupo de volúmenes (VG) vgubuntu. Su tipo es lvm y está montado en la raíz del sistema de archivos (/).</p>
+</li>
+<li>
+<p>vgubuntu-swap_1: Otro LV del mismo vgubuntu, utilizado para el área de intercambio ([SWAP]).</p>
+</li>
+<li>
+<p>vgubuntu-home: Un tercer LV de vgubuntu, montado en /home.</p>
+</li>
+<li>
+<p>sdb: Este es un segundo disco físico (posiblemente un HDD de 931 GB).</p>
+</li>
+<li>
+<p>sdb1: Una partición en sdb. Similar a sda3, su MOUNTPOINT está vacío porque es parte de LVM.</p>
+</li>
+<li>
+<p>vgdata-lvdata: Este es un volumen lógico (LV) llamado lvdata que pertenece a un grupo de volúmenes diferente, vgdata. Está montado en /mnt/data, que podría ser un punto de montaje para datos de usuario o aplicaciones.</p>
+</li>
+<li>
+<p>sr0: Un dispositivo de tipo rom, que generalmente representa una unidad de CD/DVD/Blu-ray.</p>
+</li>
+</ul>
+<p>En conclusión, la salida de lsblk en un sistema muestra la jerarquía: Discos físicos -&gt; Particiones -&gt; Grupos de volúmenes -&gt; Volumenes lógicos -&gt; Puntos de montaje finales.</p>                    </article>
+                </aside><!-- /#featured -->
+                    <section id="content" class="body">
+                        <h1>Other articles</h1>
+                        <hr />
+                        <ol id="posts-list" class="hfeed">
+
+                <li><article class="hentry">
+                    <header>
+                        <h1><a href="https://xmonroya.github.io/login-en-ssh-sin-retardo-descubre-el-secreto-para-accesos-relampago.html" rel="bookmark"
+                               title="Permalink to Login en SSH sin retardo: Descubre el secreto para accesos relámpago">Login en SSH sin retardo: Descubre el secreto para accesos relámpago</a></h1>
+                    </header>
+
+                    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2024-03-13T10:00:00-03:00">
                 Published: mié 13 marzo 2024
@@ -35,39 +107,12 @@
                 </address>
         <p>In <a href="https://xmonroya.github.io/category/linux.html">Linux</a>.</p>
 <p>tags: <a href="https://xmonroya.github.io/tag/linux.html">linux</a> </p>        
-</footer><!-- /.post-info --><p>Te pasa que cuando te conectas a tu servidor por SSH, debes eperar varios segundos a que te muestro el login, o el prompt del password.</p>
-<p>Estas demoras pueden solucionarse en la mayoria de los casos dehabilitando la resolución de DNS mediante la opción UseDNSen el archivo de configuración de SSH.</p>
-<p>Estos son los pasos a seguir:</p>
-<ol>
-<li>Edita el archivo /etc/ssh/sshd_config</li>
-<li>Cambia las opciones <strong>UseDNS</strong> y <strong>AddressFamily</strong> de la siguiente manera:</li>
-</ol>
-<div class="highlight"><pre><span></span><code>AddressFamily<span class="w"> </span>inet
-UseDNS<span class="w"> </span>no
-</code></pre></div>
-
-<ol>
-<li>
-<p>Reinicia el servicio SSH</p>
-</li>
-<li>
-<p>En RHEL versión 4 a 6:</p>
-</li>
-</ol>
-<div class="highlight"><pre><span></span><code>service<span class="w"> </span>sshd<span class="w"> </span>restart
-</code></pre></div>
-
-<ul>
-<li>En RHEL versión 7 o posterior:</li>
-</ul>
-<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>sshd
-</code></pre></div>
-
-<p>Este cambio mejora la velocidad de conexión SSH desactivando la resolución de nombres de host por parte del servidor sshd.</p>
-<p>Por su parte AddressFamily inet le indica que sólo se aceptarán conexiones IPV4.</p>
-<p>Recursos adicionales
-(Manual de sshd_config)[https://www.ssh.com/ssh/sshd_config]</p>                    </article>
-                </aside><!-- /#featured -->
+</footer><!-- /.post-info -->                        <p>Una forma de acelerar el tiempo en que se establece una conexión SSH</p>
+                        <a class="readmore" href="https://xmonroya.github.io/login-en-ssh-sin-retardo-descubre-el-secreto-para-accesos-relampago.html">read more</a>
+                    </div><!-- /.entry-content -->
+                </article></li>
+                    </ol><!-- /#posts-list -->
+                    </section><!-- /#content -->
                 <section id="extras" class="body">
                                 <div class="blogroll">
                                         <h2>links</h2>
