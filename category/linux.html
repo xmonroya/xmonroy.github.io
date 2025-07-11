@@ -4,7 +4,7 @@
                         <meta charset="utf-8" />
                         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                         <meta name="generator" content="Pelican" />
-                        <title>sferoblog - Categories</title>
+                        <title>sferoblog - Linux</title>
                         <link rel="stylesheet" href="/theme/css/main.css" />
         </head>
 
@@ -13,20 +13,61 @@
                         <h1><a href="/">sferoblog</a></h1>
                         <nav><ul>
                                                 <li><a href="/category/comandos-linux.html">Comandos Linux</a></li>
-                                                <li><a href="/category/linux.html">Linux</a></li>
+                                                <li class="active"><a href="/category/linux.html">Linux</a></li>
                                                 <li><a href="/category/lvm.html">LVM</a></li>
                         </ul></nav>
                 </header><!-- /#banner -->
 
-    <section id="content" class="body">
-        <h1>Categories for sferoblog</h1>
-        <ul>
-                <li><a href="/category/comandos-linux.html">Comandos Linux</a> (1)</li>
-                <li><a href="/category/linux.html">Linux</a> (1)</li>
-                <li><a href="/category/lvm.html">LVM</a> (2)</li>
-        </ul>
-    </section>
+                <aside id="featured" class="body">
+                    <article>
+                        <h1 class="entry-title"><a href="/login-en-ssh-sin-retardo-descubre-el-secreto-para-accesos-relampago.html">Login en SSH sin retardo: Descubre el secreto para accesos relámpago</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2024-03-13T10:00:00-03:00">
+                Published: mié 13 marzo 2024
+        </abbr>
+                <br />
+                <abbr class="modified" title="2025-07-09T10:00:00-04:00">
+                        Updated: mié 09 julio 2025
+                </abbr>
 
+                <address class="vcard author">
+                        By                                 <a class="url fn" href="/author/alex-monroy.html">Alex Monroy</a>
+                </address>
+        <p>In <a href="/category/linux.html">Linux</a>.</p>
+<p>tags: <a href="/tag/linux.html">linux</a> </p>        
+</footer><!-- /.post-info --><p>Te pasa que cuando te conectas a tu servidor por SSH, debes eperar varios segundos a que te muestro el login, o el prompt del password.</p>
+<p>Estas demoras pueden solucionarse en la mayoria de los casos dehabilitando la resolución de DNS mediante la opción UseDNSen el archivo de configuración de SSH.</p>
+<p>Estos son los pasos a seguir:</p>
+<ol>
+<li>Edita el archivo /etc/ssh/sshd_config</li>
+<li>Cambia las opciones <strong>UseDNS</strong> y <strong>AddressFamily</strong> de la siguiente manera:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>AddressFamily<span class="w"> </span>inet
+UseDNS<span class="w"> </span>no
+</code></pre></div>
+
+<ol>
+<li>
+<p>Reinicia el servicio SSH</p>
+</li>
+<li>
+<p>En RHEL versión 4 a 6:</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code>service<span class="w"> </span>sshd<span class="w"> </span>restart
+</code></pre></div>
+
+<ul>
+<li>En RHEL versión 7 o posterior:</li>
+</ul>
+<div class="highlight"><pre><span></span><code>systemctl<span class="w"> </span>restart<span class="w"> </span>sshd
+</code></pre></div>
+
+<p>Este cambio mejora la velocidad de conexión SSH desactivando la resolución de nombres de host por parte del servidor sshd.</p>
+<p>Por su parte AddressFamily inet le indica que sólo se aceptarán conexiones IPV4.</p>
+<p>Recursos adicionales
+(Manual de sshd_config)[https://www.ssh.com/ssh/sshd_config]</p>                    </article>
+                </aside><!-- /#featured -->
                 <section id="extras" class="body">
                                 <div class="blogroll">
                                         <h2>links</h2>
